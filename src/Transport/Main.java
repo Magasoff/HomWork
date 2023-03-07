@@ -1,9 +1,6 @@
 package Transport;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,7 +44,6 @@ public class Main {
         mechanicAndrei.fixTheCar(truck1);
         mechanicAndrei.performMaintenance(truck1);
 
-        
 
         Map<Transport, List<Mechanic>> transportandmechanics = new HashMap<>();
         lightCar lightCar = new lightCar("Опель", "корса", 1.4, 20, 190, 20, bodyCar.Type2, List.of(mechanicIvan));
@@ -55,6 +51,20 @@ public class Main {
 
         for (Map.Entry<Transport, List<Mechanic>> map : transportandmechanics.entrySet()) {
             System.out.println(map);
+        }
+        Set<Drive> driveSet = new HashSet<>();
+        List<Drive> drives = new ArrayList<>();
+        drives.add(driveB1);
+        drives.add(driveD1);
+
+        for (Drive drive : drives) {
+            driveSet.add(drive);
+        }
+        Iterator<Drive> iterator = driveSet.iterator();
+
+        while (iterator.hasNext()) {
+            Drive drive = iterator.next();
+            System.out.println(drive);
         }
     }
 }

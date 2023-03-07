@@ -35,16 +35,20 @@ public abstract class Drive {
         this.experinse = experinse;
     }
 
-    @Override
-    public String toString() {
-        return name + " категория прав: " + driveLicense + " водительский стаж: " + experinse;
-    }
-
     public abstract void startMove();
 
     public abstract void finish();
 
     public abstract void refill();
+
+    @Override
+    public String toString() {
+        return "Drive{" +
+                "name='" + name + '\'' +
+                ", driveLicense=" + driveLicense +
+                ", experinse=" + experinse +
+                '}';
+    }
 }
 
 
