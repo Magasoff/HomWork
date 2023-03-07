@@ -1,7 +1,9 @@
 package Transport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,31 +21,45 @@ public class Main {
         //  printInfo(truck);
         //  printInfo(bus);
 
-        Mechanic mechanic = new Mechanic("Иванов", "Восто-авто");
-        Mechanic mechanic1 = new Mechanic("Обломов", "Авто-дом");
-        Mechanic mechanic2 = new Mechanic("Баранов", "Збс - авто");
+        Mechanic mechanicIvan = new Mechanic("Иван", "Восток-авто");
+        Mechanic mechanicAndrei = new Mechanic("Андрей", "Авто-дом");
+        Mechanic mechanicArkadiy = new Mechanic("Аркадий", "Збс - авто");
 
         DriveB driveB1 = new DriveB("Игорь", true, 10);
         DriveD driveD1 = new DriveD("Петр", true, 19);
         DriveC driveC1 = new DriveC("Олег", true, 12);
 
         lightCar lightCar1 = new lightCar("Лада", "Приора", 1.5, 20, 190, 20,
-                bodyCar.Type1,List.of(mechanic1));
-        Bus bus1 = new Bus("Икарус", "Парус", 1.8, 40, 90, 20, Size.getValue(20),List.of(mechanic2));
-        Truck truck1 = new Truck("Рено", "Ман", 4.4, 50, 90, 20,  loadCapacity.getValue(20), List.of(mechanic));
+                bodyCar.Type1, List.of(mechanicIvan));
+        Bus bus1 = new Bus("Икарус", "Парус", 1.8, 40, 90, 20, Size.getValue(20), List.of(mechanicAndrei));
+        Truck truck1 = new Truck("Рено", "Ман", 4.4, 50, 90, 20, loadCapacity.getValue(20), List.of(mechanicArkadiy));
 
 
-        List <Transport> racers  = new ArrayList<>();
+        List<Transport> racers = new ArrayList<>();
 
         racers.add(lightCar1);
         racers.add(bus1);
         racers.add(truck1);
 
-        mechanic1.fixTheCar(lightCar1);
-        mechanic1.performMaintenance(lightCar1);
+        mechanicIvan.fixTheCar(lightCar1);
+        mechanicIvan.performMaintenance(lightCar1);
 
-        mechanic2.fixTheCar(truck1);
-        mechanic2.performMaintenance(truck1);
+        mechanicAndrei.fixTheCar(truck1);
+        mechanicAndrei.performMaintenance(truck1);
+
+        
+
+        Map<Transport, List<Mechanic>> transportandmechanics = new HashMap<>();
+        lightCar lightCar = new lightCar("Опель", "корса", 1.4, 20, 190, 20, bodyCar.Type2, List.of(mechanicIvan));
+        transportandmechanics.put(lightCar, lightCar.getMechanics());
+
+        for (Map.Entry<Transport, List<Mechanic>> map : transportandmechanics.entrySet()) {
+            System.out.println(map);
+        }
+    }
+}
+
+
 
 
         //    try {
@@ -52,8 +68,7 @@ public class Main {
         //       System.out.println(bus.getBrand() + " " + bus.getModel() + bus.passDiagnostics());
         //   } catch (RuntimeException e) {
         //       System.out.println(e.getMessage());
-    }
-}
+
 
 //    private static void printInfo(Transport<?> transport) {
 //   System.out.println(" Водитель управляет автомобилем " + transport.getBrand() + " " + transport.getModel() + " будет участвовать в заезде ");

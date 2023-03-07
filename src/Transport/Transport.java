@@ -1,15 +1,19 @@
 package Transport;
 
+import javax.xml.namespace.QName;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public abstract class Transport <T extends Drive> implements Competing {
 
     private final String brand;
     private final String model;
     private double engineVolume;
-    public List <Mechanic> mechanicList;
+    public List<Mechanic> mechanicList;
 
-    public Transport(String brand, String model, double engineVolume, int maxSpeed, List <Mechanic> mechanicList) {
+    public Transport(String brand, String model, double engineVolume, int maxSpeed, List<Mechanic> mechanicList) {
         this.brand = brand;
         this.model = model;
         this.engineVolume = engineVolume;
@@ -37,7 +41,7 @@ public abstract class Transport <T extends Drive> implements Competing {
         return mechanicList;
     }
 
-    public boolean checkNeedTransportService () {
+    public boolean checkNeedTransportService() {
         try {
             passDiagnostics();
         } catch (transportTypeException e) {
@@ -63,18 +67,57 @@ public abstract class Transport <T extends Drive> implements Competing {
 
     //public abstract boolean diagnostics();
 
-    public abstract void printType ();
+    public abstract void printType();
 
-    abstract boolean passDiagnostics () throws transportTypeException;
+    abstract boolean passDiagnostics() throws transportTypeException;
 
-    public abstract String repair ();
+    public abstract String repair();
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transport<?> transport = (Transport<?>) o;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && brand.equals(transport.brand) && model.equals(transport.model) && mechanicList.equals(transport.mechanicList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model, engineVolume, mechanicList);
+    }
+
+    @Override
     public String toString() {
-        return " Транспорт: " +  "марка: " + brand + " модель " + model + " " + engineVolume + " объем двигателя " + " обслуживается механиком "+ mechanicList;
+        return "Transport{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", engineVolume=" + engineVolume +
+                ", mechanicList=" + mechanicList +
+                '}';
     }
 }
+
+
+
+
+
+
+
+
+    //  @Override
+    //  public String toString() {
+    //      return " Транспорт: " + "марка: " + brand + " модель " + model + " " + " объем двигателя " + engineVolume + " обслуживается механиком " + mechanicList;
+    //   }
+
+
+
+
+
+
+
+
+
 
 
 
